@@ -1,0 +1,26 @@
+@startuml
+skinparam componentStyle uml2
+
+database DB {
+
+}
+
+node "微信|支付宝" as pay{
+  [支付服务] as pay_service
+}
+
+node 系统服务器 as server{
+    [系统服务] as service
+    service -- DB
+    service -- pay_service
+}
+
+node 管理中心系统 as admin_cli{
+    [管理中心界面]-- service
+}
+node 食堂收款机 as canteen_cli{
+    [收款机界面] -- service
+}
+
+
+@enduml

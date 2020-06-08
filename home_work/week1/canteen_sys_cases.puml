@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor 消费者 as consumer
+actor 服务员 as waiter
+actor 管理员 as admin
+
+rectangle 食堂就餐卡系统{
+
+    (统计数据) <. (打印) : include
+    (监视消费) --admin
+    (打印)--admin
+
+     waiter -- (显示消费额及余额)
+     waiter -- (扣减金额)
+
+     consumer --(注册)
+     consumer --(缴费)
+     consumer --(显示余额)
+
+}
+@enduml

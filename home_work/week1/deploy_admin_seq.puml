@@ -1,0 +1,19 @@
+@startuml
+    actor "管理员" as customer
+    participant 管理中心系统 as admin_sys
+    participant 系统服务 as service
+
+    customer -> admin_sys
+    admin_sys->service
+    activate service
+
+    service -> DB
+    activate DB
+    DB --> service
+    deactivate DB
+    service --> admin_sys
+    deactivate service
+
+    admin_sys-->customer
+
+@enduml

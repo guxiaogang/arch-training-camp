@@ -1,0 +1,28 @@
+@startuml
+    actor customer
+    box "Internal" #LightBlue
+    participant 收款机系统 as receive_sys
+    participant 系统服务 as service
+    database DB
+    end box
+    participant "微信\支付宝" as pay
+
+    customer -> receive_sys: 消费
+    receive_sys->service: 消费数据
+    activate service
+
+    opt
+    service -> pay
+    activate pay
+    pay --> service
+    deactivate pay
+    end
+
+    service -> DB :修改
+    activate DB
+    DB --> service
+    deactivate DB
+    service --> receive_sys
+    deactivate service
+
+@enduml
