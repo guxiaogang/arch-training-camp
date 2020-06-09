@@ -1,19 +1,28 @@
 @startuml
-    actor "管理员" as customer
+    actor customer
+    box "Internal" #LightBlue
     participant 管理中心系统 as admin_sys
     participant 系统服务 as service
+    database DB
+    end box
+    participant "微信\支付宝" as pay
 
     customer -> admin_sys
     admin_sys->service
     activate service
 
-    service -> DB
+    opt "三方支付"
+    service -> pay
+    activate pay
+    pay --> service
+    deactivate pay
+    end
+
+    service -> DB :修改
     activate DB
     DB --> service
     deactivate DB
     service --> admin_sys
     deactivate service
-
-    admin_sys-->customer
 
 @enduml
