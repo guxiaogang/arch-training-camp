@@ -1,5 +1,5 @@
 @startuml
-    actor "管理员" as customer
+    actor "收银员" as customer
     participant 收款机系统 as receive_sys
     participant 系统服务 as service
 

@@ -2,7 +2,7 @@
 left to right direction
 skinparam packageStyle rectangle
 actor 消费者 as consumer
-actor 服务员 as waiter
+actor 收银员 as waiter
 actor 管理员 as admin
 
 rectangle 食堂就餐卡系统{
