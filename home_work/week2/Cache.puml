@@ -1,0 +1,22 @@
+@startuml
+
+interface CacheClient{
+     + Object get(Object key)
+     + void put(Object key,Object value)
+     + void delete(Object key)
+}
+interface CacheManager{
+    + void rebuild()
+}
+
+class Cache {
+ + Object get(Object key)
+ + void put(Object key,Object value)
+ + void delete(Object key)
+ + void rebuild()
+}
+
+CacheClient <|.. Cache
+CacheManager <|.. Cache
+
+@enduml
