@@ -25,6 +25,4 @@ public abstract class Container extends Component {
             component.print();
         }
     }
-
-
 }
