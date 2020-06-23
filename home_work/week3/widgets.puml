@@ -1,0 +1,42 @@
+@startuml
+
+abstract class Component{
+    - name
+    + getName()
+    + add(Component)
+    + remove(Component)
+    # print()
+}
+abstract class Container{
+    - List<Component> components
+    + add(Component)
+    + remove(Component)
+    # print()
+}
+
+class WinForm {
+}
+
+class Frame {
+}
+Component <|-- Container
+Container <|-- WinForm
+Container <|-- Frame
+
+abstract class Widget{
+    # print()
+}
+Component <|-- Widget
+
+class Label
+Widget  <|-- Label
+Widget  <|-- Button
+Widget  <|-- Picture
+
+Container *-- Component
+
+class Client
+
+Client -> Component
+
+@enduml
