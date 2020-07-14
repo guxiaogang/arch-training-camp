@@ -1,0 +1,52 @@
+@startuml
+==  临时失效状态 ==
+participant 应用服务器 as app_client
+participant 存储服务器 as storage_server
+participant 故障服务器 as error_server
+participant 管理服务器 as admin_server
+
+storage_server<-admin_server: 心跳检测
+activate storage_server
+deactivate storage_server
+
+error_server<-admin_server: 心跳检测
+activate error_server
+deactivate error_server
+
+app_client->admin_server:获取配置信息
+activate admin_server
+
+admin_server-->app_client: 配置信息
+deactivate admin_server
+
+app_client->app_client: 路由选择
+
+app_client->storage_server: 请求服务
+app_client->error_server: 请求服务
+destroy error_server
+app_client->error_server: 重试
+destroy error_server
+
+app_client->admin_server: 临时故障仲裁
+
+newpage
+== 临时失效中的读写==
+participant 临时服务器 as temp_server
+app_client->admin_server: 获取配置信息
+activate admin_server
+admin_server-->app_client
+deactivate admin_server
+app_client->storage_server: 写数据
+app_client->temp_server:写数据
+
+newpage
+==失效恢复==
+temp_server->error_server: 恢复数据
+app_client->admin_server: 获取配置信息
+activate admin_server
+admin_server-->app_client
+deactivate admin_server
+
+app_client->storage_server:写数据
+app_client->error_server:写数据
+@enduml
