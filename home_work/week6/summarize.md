@@ -13,7 +13,7 @@
 * mycat  
 ![mycat](./assets/mycat.png)
 
-* 实践中的扩容
+* 实践中的扩容  
 ![mycat_ext](./assets/mycat-ext.png)
 
 #### CAP
