@@ -1,0 +1,33 @@
+@startuml
+class LoadTestTool
+class ForkJoinPoll
+class LoadTestTask{
+
+}
+class ExecutionResult{
+    -id
+    -startTime
+    -finishTime
+    -executionTime
+    -threadName
+    -response
+}
+class AggregationReport{
+    -maxResTime
+    -minResTime
+    -avgResTime
+    -ninetyFiveResTime
+    -fiftyResTime
+
+}
+class AggregationAnalyzer{
+    +analyze(): AggregationReport
+}
+RecursiveTask <|--  LoadTestTask
+ForkJoinPoll *-- LoadTestTask
+LoadTestTool -> ForkJoinPoll
+LoadTestTask -> ExecutionResult
+AggregationAnalyzer -> ExecutionResult
+AggregationAnalyzer -> AggregationReport
+LoadTestTool -> AggregationAnalyzer
+@enduml
